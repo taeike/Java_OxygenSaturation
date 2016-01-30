@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Window;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,7 +11,7 @@ public class OxygenSaturationPanel extends JPanel{
 	private JFrame _mainFrame;
 	private OxygenSaturationCircleGraph _oxygenSaturationCircleGraph;
 	private PulseGraph _pulseGraph;
-	
+	private static final Random random = new Random();
 	public OxygenSaturationPanel() {
 		_oxygenSaturationCircleGraph = new OxygenSaturationCircleGraph();
 		_pulseGraph = new PulseGraph();
@@ -32,14 +33,11 @@ public class OxygenSaturationPanel extends JPanel{
 			OxygenSaturationCircleGraph._circleGraphWidth,OxygenSaturationCircleGraph._circleGraphHeight);
 		this.add(_oxygenSaturationCircleGraph);
 		//맥박 그래프 삽입.
-		_pulseGraph.setBounds(0,100,Main._FRAME_WIDTH, Main._FRAME_HEIGHT-400);
+		_pulseGraph.setBounds(0,100,PulseGraph.GRAPH_WIDTH,PulseGraph.GRAPH_HEIGHT);
 		this.add(_pulseGraph);
 		
 		_mainFrame.add(this);
 		_mainFrame.setVisible(true);
 	}
-	@Override
-	protected void paintComponent(Graphics g) {
 	
-	}
 }
