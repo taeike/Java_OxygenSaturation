@@ -5,13 +5,13 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-public class OxygenSaturationCircleGraph extends JPanel{
+public class CircleGraph extends JPanel{
 	
 	private int _oxygenSaturationValue = 95;
 	public final static int _circleGraphWidth = 200;
 	public final static int _circleGraphHeight= 200;
 	
-	public OxygenSaturationCircleGraph() {
+	public CircleGraph() {
 		
 	}
 	public void setUp_GUI(){
@@ -25,7 +25,7 @@ public class OxygenSaturationCircleGraph extends JPanel{
 		g2d.setColor(Color.white);
 		g2d.fillOval(0,0,_circleGraphWidth,_circleGraphHeight);
 		
-		if(_oxygenSaturationValue > 94) g2d.setColor(Color.green); //정상수치
+		if(_oxygenSaturationValue > 94) g2d.setColor(Color.ORANGE); //정상수치
 		else g2d.setColor(Color.RED);//비정상 수치
 		g2d.fillOval(15,15,_circleGraphWidth-30,_circleGraphHeight-30);
 		
