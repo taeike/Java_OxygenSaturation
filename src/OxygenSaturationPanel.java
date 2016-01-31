@@ -24,9 +24,9 @@ public class OxygenSaturationPanel extends JPanel{
 	private JButton _changeColorButton;
 	private int _changeColor=0;
 	public OxygenSaturationPanel() {
-		_oxygenSaturationCircleGraph = new CircleGraph();
+		_oxygenSaturationCircleGraph = new CircleGraph(94);
 		_pulseGraph = new PulseGraph();
-		_heartRateCircleGraph = new CircleGraph();
+		_heartRateCircleGraph = new CircleGraph(60);
 		setUp_GUI();
 	}
 	
@@ -88,6 +88,8 @@ public class OxygenSaturationPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				_pulseGraph.changeColor();
+				_oxygenSaturationCircleGraph.changeColor();
+				_heartRateCircleGraph.changeColor();
 				if(_changeColor+1 < 4 ) _changeColor = _changeColor+1;
 				else _changeColor = 0;
 				_mainFrame.repaint();
