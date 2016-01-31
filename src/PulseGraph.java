@@ -13,11 +13,11 @@ public class PulseGraph extends JPanel{
 	
 	public final static int GRAPH_WIDTH = 700;
 	public final static int GRAPH_HEIGHT= 300;
-	private int   _graphPeriod=30;
+	private int   _graphCycle=30;
 	private int   _position=1;
 	private int   _top = 20;
 	private int   _clear = 0;
-
+	private int   _changeColor = 0;
 	Vector<QuadCurve2D> _data = new Vector<QuadCurve2D>();
 
 	public PulseGraph(){
@@ -26,13 +26,17 @@ public class PulseGraph extends JPanel{
 		d.start();
 		setSize(GRAPH_WIDTH,GRAPH_HEIGHT);
 	}
+
 	@Override
 	public void paint(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
 		g2D.setColor(Color.ORANGE);
 		g2D.drawLine(0,GRAPH_HEIGHT/2,GRAPH_WIDTH,GRAPH_HEIGHT/2);
 		g2D.fillRect(0, 0, GRAPH_WIDTH, GRAPH_HEIGHT);
-		g2D.setColor(Color.white);
+		
+		if(_changeColor%3 == 0) g2D.setColor(Color.white);
+		if(_changeColor%3 == 1) g2D.setColor(new Color(0,153,153));
+		if(_changeColor%3 == 2) g2D.setColor(new Color(255,204,051));
 		g2D.setStroke(new BasicStroke(10));
 		
 		for(int i=0;i<_clear;i++){
@@ -90,52 +94,64 @@ public class PulseGraph extends JPanel{
 	}
 	private void preparData(){
 
-		_data.addElement(new QuadCurve2D.Float((float)_position*_graphPeriod,GRAPH_HEIGHT/2+30,
-				(float)_position*_graphPeriod+_graphPeriod/2,GRAPH_HEIGHT/2+_top*0+30, 
-				(float)_position*_graphPeriod+_graphPeriod,GRAPH_HEIGHT/2+30));
+		_data.addElement(new QuadCurve2D.Float((float)_position*_graphCycle,GRAPH_HEIGHT/2+30,
+				(float)_position*_graphCycle+_graphCycle/2,GRAPH_HEIGHT/2+_top*0+30, 
+				(float)_position*_graphCycle+_graphCycle,GRAPH_HEIGHT/2+30));
 		_position = _position+1;
 
 		for(int i=1;i<5;i++){
-			_data.addElement(new QuadCurve2D.Float((float)_position*_graphPeriod,GRAPH_HEIGHT/2+30,
-					(float)_position*_graphPeriod+_graphPeriod/2,GRAPH_HEIGHT/2+_top*i+30, 
-					(float)_position*_graphPeriod+_graphPeriod,GRAPH_HEIGHT/2+30));
+			_data.addElement(new QuadCurve2D.Float((float)_position*_graphCycle,GRAPH_HEIGHT/2+30,
+					(float)_position*_graphCycle+_graphCycle/2,GRAPH_HEIGHT/2+_top*i+30, 
+					(float)_position*_graphCycle+_graphCycle,GRAPH_HEIGHT/2+30));
 			_position = _position+1;
 
-			_data.addElement(new QuadCurve2D.Float((float)_position*_graphPeriod,GRAPH_HEIGHT/2+30,
-					(float)_position*_graphPeriod+_graphPeriod/2,GRAPH_HEIGHT/2-_top*i+30, 
-					(float)_position*_graphPeriod+_graphPeriod,GRAPH_HEIGHT/2+30));
+			_data.addElement(new QuadCurve2D.Float((float)_position*_graphCycle,GRAPH_HEIGHT/2+30,
+					(float)_position*_graphCycle+_graphCycle/2,GRAPH_HEIGHT/2-_top*i+30, 
+					(float)_position*_graphCycle+_graphCycle,GRAPH_HEIGHT/2+30));
 			_position = _position+1;
 		}
 
-		_data.addElement(new QuadCurve2D.Float((float)_position*_graphPeriod,GRAPH_HEIGHT/2+30,
-											   (float)_position*_graphPeriod+_graphPeriod/2,GRAPH_HEIGHT/2+(70*2)+30, 
-											   (float)_position*_graphPeriod+_graphPeriod,GRAPH_HEIGHT/2+30));
+		_data.addElement(new QuadCurve2D.Float((float)_position*_graphCycle,GRAPH_HEIGHT/2+30,
+											   (float)_position*_graphCycle+_graphCycle/2,GRAPH_HEIGHT/2+(80*2)+30, 
+											   (float)_position*_graphCycle+_graphCycle,GRAPH_HEIGHT/2+30));
 		
 		_position = _position+1;
-		_data.addElement(new QuadCurve2D.Float((float)_position*_graphPeriod,GRAPH_HEIGHT/2+30,
-											   (float)_position*_graphPeriod+_graphPeriod/2,GRAPH_HEIGHT/2-(70*4)+30, 
-											   (float)_position*_graphPeriod+_graphPeriod,GRAPH_HEIGHT/2+30));
+		_data.addElement(new QuadCurve2D.Float((float)_position*_graphCycle,GRAPH_HEIGHT/2+30,
+											   (float)_position*_graphCycle+_graphCycle/2,GRAPH_HEIGHT/2-(80*4)+30, 
+											   (float)_position*_graphCycle+_graphCycle,GRAPH_HEIGHT/2+30));
 		_position = _position+1;
 		
-		_data.addElement(new QuadCurve2D.Float((float)_position*_graphPeriod,GRAPH_HEIGHT/2+30,
-											   (float)_position*_graphPeriod+_graphPeriod/2,GRAPH_HEIGHT/2+(70*2)+30, 
-											   (float)_position*_graphPeriod+_graphPeriod,GRAPH_HEIGHT/2+30));
+		_data.addElement(new QuadCurve2D.Float((float)_position*_graphCycle,GRAPH_HEIGHT/2+30,
+											   (float)_position*_graphCycle+_graphCycle/2,GRAPH_HEIGHT/2+(80*2)+30, 
+											   (float)_position*_graphCycle+_graphCycle,GRAPH_HEIGHT/2+30));
 		_position = _position+1;
 		for(int i=4;i>0;i--){
-			_data.addElement(new QuadCurve2D.Float((float)_position*_graphPeriod,GRAPH_HEIGHT/2+30,
-					(float)_position*_graphPeriod+_graphPeriod/2,GRAPH_HEIGHT/2-_top*i+30, 
-					(float)_position*_graphPeriod+_graphPeriod,GRAPH_HEIGHT/2+30));
+			_data.addElement(new QuadCurve2D.Float((float)_position*_graphCycle,GRAPH_HEIGHT/2+30,
+					(float)_position*_graphCycle+_graphCycle/2,GRAPH_HEIGHT/2-_top*i+30, 
+					(float)_position*_graphCycle+_graphCycle,GRAPH_HEIGHT/2+30));
 			_position = _position+1;
 
-			_data.addElement(new QuadCurve2D.Float((float)_position*_graphPeriod,GRAPH_HEIGHT/2+30,
-					(float)_position*_graphPeriod+_graphPeriod/2,GRAPH_HEIGHT/2+_top*i+30, 
-					(float)_position*_graphPeriod+_graphPeriod,GRAPH_HEIGHT/2+30));
+			_data.addElement(new QuadCurve2D.Float((float)_position*_graphCycle,GRAPH_HEIGHT/2+30,
+					(float)_position*_graphCycle+_graphCycle/2,GRAPH_HEIGHT/2+_top*i+30, 
+					(float)_position*_graphCycle+_graphCycle,GRAPH_HEIGHT/2+30));
 			_position = _position+1;
 		}
-		_data.addElement(new QuadCurve2D.Float((float)_position*_graphPeriod,GRAPH_HEIGHT/2+30,
-				(float)_position*_graphPeriod+_graphPeriod/2,GRAPH_HEIGHT/2+_top*0+30, 
-				(float)_position*_graphPeriod+_graphPeriod,GRAPH_HEIGHT/2+30));
+		_data.addElement(new QuadCurve2D.Float((float)_position*_graphCycle,GRAPH_HEIGHT/2+30,
+				(float)_position*_graphCycle+_graphCycle/2,GRAPH_HEIGHT/2+_top*0+30, 
+				(float)_position*_graphCycle+_graphCycle,GRAPH_HEIGHT/2+30));
 		_position = _position+1;
 	}
-	
+	public void set_graphPeriodIncrease() {
+		this._graphCycle = _graphCycle + 1 ;
+	}
+	public void set_graphPeriodDecrease() {
+		this._graphCycle = _graphCycle - 1 ;
+	}
+	public void set_clear(int _clear) {
+		this._clear = _clear;
+	}
+	public void changeColor(){
+		if(_changeColor+1 < 4 ) this._changeColor+=1;
+		else _changeColor = 0;
+	}
 }
